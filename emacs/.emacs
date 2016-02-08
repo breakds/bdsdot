@@ -6,6 +6,9 @@
 ;;;; References:
 ;;;; 1. Sacha Chua's emacs configuration (http://sach.ac/dotemacs)
 
+;; Enable Common Lisp
+(require 'cl)
+
 ;; Set up the load path for ELPA/MELPA packages.
 (require 'package)
 (package-initialize nil)
