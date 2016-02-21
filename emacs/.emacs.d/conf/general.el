@@ -67,6 +67,14 @@
 ;;; * A more convenient buffer list
 (global-set-key "\C-x\C-b" 'electric-buffer-list)
 
+;;; * Make emacs respect the bash environment variables.
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+(exec-path-from-shell-copy-env "PYTHONPATH")
+(exec-path-from-shell-copy-env "PATH")
+(exec-path-from-shell-copy-env "LD_LIBRARY_PATH")
+            
+
 ;;;; ============================================================+
 ;;;; Theme Settings                                              |
 ;;;; ------------------------------------------------------------+
