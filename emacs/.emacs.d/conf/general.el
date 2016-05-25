@@ -5,8 +5,23 @@
       user-mail-address "breakds@gmail.com")
 
 ;;;; ============================================================+
+;;;; Global Functions                                            |
+;;;; ------------------------------------------------------------+
+
+(defun ensure-package-installed (&rest packages)
+  ;; http://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifying-a-list-of-package-name
+  (mapc (lambda (package)
+          (unless (package-installed-p package)
+            (when (y-or-n-p (format "Package %s is missing. Install it?" package))
+              (package-install package))))
+        packages))
+
+;;;; ============================================================+
 ;;;; Global Settings                                             |
 ;;;; ------------------------------------------------------------+
+;;; * Disable Toolbar
+(tool-bar-mode -1)
+
 ;;; * Change backup directory.
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
