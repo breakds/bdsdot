@@ -88,8 +88,11 @@
 (exec-path-from-shell-copy-env "PYTHONPATH")
 (exec-path-from-shell-copy-env "PATH")
 (exec-path-from-shell-copy-env "LD_LIBRARY_PATH")
-            
 
+;;; * IME: fcitx
+(fcitx-aggressive-setup)
+(setq fcitx-use-dbus t)
+            
 ;;;; ============================================================+
 ;;;; Theme Settings                                              |
 ;;;; ------------------------------------------------------------+
