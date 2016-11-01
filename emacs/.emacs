@@ -62,6 +62,7 @@
      (output-dvi "xdvi")
      (output-pdf "Atril")
      (output-html "xdg-open"))))
+ '(markdown-command "grip --export -")
  '(org-agenda-files
    (quote
     ("~/org/cron.org" "~/org/reading.org" "~/org/unsorted.org" "~/org/projects.org"))))
