@@ -65,7 +65,10 @@
  '(markdown-command "grip --export -")
  '(org-agenda-files
    (quote
-    ("~/org/cron.org" "~/org/reading.org" "~/org/unsorted.org" "~/org/projects.org"))))
+    ("~/org/cron.org" "~/org/reading.org" "~/org/unsorted.org" "~/org/projects.org")))
+ '(package-selected-packages
+   (quote
+    (protobuf-mode yaml-mode web-mode use-package toc-org solarized-theme smart-mode-line org-doing org-dashboard markdown-mode+ load-dir forecast fcitx exec-path-from-shell elm-mode ein cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
