@@ -102,7 +102,55 @@
 ;;           (semantic-add-system-include dir 'c-mode))
 ;;         include-dirs))
 
+;;;; ============================================================+
+;;;; RTags and its friends.                                      |
+;;;; ------------------------------------------------------------+
 
+(require 'rtags)
+(require 'company-rtags)
+
+(setq rtags-completions-enabled t)
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends 'company-rtags))
+(setq rtags-autostart-diagnostics t)
+(rtags-enable-standard-keybindings)
+
+(define-key c-mode-base-map (kbd "M-.") (function rtags-find-symbol-at-point))
+(define-key c-mode-base-map (kbd "M-,") (function rtags-location-stack-back))
+;; Other shortcuts defined in the standard-keybndings
+;; - (define-key c-mode-base-map (kbd "C-M-a") (function beginning-of-defun))
+;; - (define-key c-mode-base-map (kbd "C-M-e") (function end-of-defun))
+;; - (define-key c-mode-base-map (kbd "C-M-h") (function makr-defun))
+;; - (define-key c-mode-base-map (kbd "C-c-r ,") (function rtags-find-references-at-point))
+
+
+;;;; ============================================================+
+;;;; Syntax Checking with Flycheck                               |
+;;;; ------------------------------------------------------------+
+
+;; (require 'flycheck)
+;; (add-hook 'c++-mode-hook 'flycheck-mode)
+;; (add-hook 'c-mode-hook 'flycheck-mode)
+
+(require 'flycheck-rtags)
+(defun my-flycheck-rtags-setup ()
+  (flycheck-select-checker 'rtags)
+  (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
+  (setq-local flycheck-check-syntax-automatically nil))
+;; (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
+
+;;;; ============================================================+
+;;;; cmake-ide                                                   |
+;;;; ------------------------------------------------------------+
+
+(cmake-ide-setup)
+
+;; To have cmake-ide automatically create a compilation commands file
+;; in your project root create a .dir-locals.el containing the
+;; following:
+;;
+;; ((nil . ((cmake-ide-build-dir . "<PATH_TO_PROJECT_BUILD_DIRECTORY>"))))
 
 ;;;; Compilation Mode
 ;; copied from http://www.emacswiki.org/emacs/CompileCommand
@@ -117,7 +165,7 @@ directory."
     (call-interactively 'execute-extended-command)))
 
 ;; copied from http://www.emacswiki.org/emacs/CompileCommand
-(defun get-closest-pathname (&optional (file "Makefile"))
+(defun get-closest-pathname (file)
   "Determine the pathname of the first instance of FILE starting from the current directory towards root.
 This may not do the correct thing in presence of links. If it does not find FILE, then it shall return the name
 of FILE in the current directory, suitable for creation"
