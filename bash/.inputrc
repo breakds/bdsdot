@@ -1,0 +1,5 @@
+set convert-meta on
+"\e[A": history-search-backward
+Meta-p: history-search-backward
+"\e[B": history-search-forward
+Meta-n: history-search-forward
