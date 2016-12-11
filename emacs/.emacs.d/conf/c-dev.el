@@ -1,111 +1,47 @@
 ;;;; C/C++ development appearance
 
-;; (setq default-c-style "stroustrup")
-(setq c-basic-indent 2)
-(setq tab-width 4)
-(setq-default indent-tabs-mode nil)
-(put 'eval-expression 'disabled nil)
-
-;; Add some colors to emacs session
+;;;; ============================================================+
+;;;; Global Font Lock Mode for Syntax Highlighting               |
+;;;; ------------------------------------------------------------+
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
 
-
-;; Associate .cu file with c++-mode
-(add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
-
-
-
-;;;; Cedet Configration
-;; documentation of semantic submodes can be found at 
-;; www.gnu.org/software/emacs/manual/html_node/semantic/Semantic-mode.html
-(load-file "~/.emacs.d/conf/google-c-style.el")
-;; (load-file "~/.emacs.d/lisp/cedet/cedet-devel-load.el")
-;; (add-to-list 'load-path "~/.emacs.d/lisp/cedet/contrib")
-;; (add-to-list 'Info-directory-list "~/projects/cedet/doc/info")
-
-;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-;; (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-;; (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-;;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-;;(add-to-list 'semantic-default-submodes ')
-
-;; Activate semantic
-;; (semantic-mode 1)
-;; (require 'semantic/bovine/c)
-;; (require 'semantic/bovine/gcc)
-;; (require 'semantic/bovine/clang)
-;; (require 'semantic/ia)
-;; (require 'semantic/decorate/include)
-;; (require 'semantic/lex-spp)
-;; (require 'eassist)
-
-;; (defun my-cedet-hook ()
-;;   (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-;;   (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-;;   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
-;;   ;; Press f11 to jump to tags, and Shift-F11 to jump back
-;;   (local-set-key [f11] 'semantic-ia-fast-jump)
-;;   (local-set-key [S-f11]
-;;                  (lambda ()
-;;                    (interactive)
-;;                    (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-;;                        (error "Semantic Bookmark ring is currently empty"))
-;;                    (let* ((ring (oref semantic-mru-bookmark-ring ring))
-;;                           (alist (semantic-mrub-ring-to-assoc-list ring))
-;;                           (first (cdr (car alist))))
-;;                      (if (semantic-equivalent-tag-p (oref first tag)
-;;                                                     (semantic-current-tag))
-;;                          (setq first (cdr (car (cdr alist)))))
-;;                      (semantic-mrub-switch-tags first))))
-;;   (local-set-key "\C-cq" 'semantic-ia-show-doc)
-;;   (local-set-key "\C-cs" 'semantic-ia-show-summary)
-;;   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-;;   (local-set-key (kbd "C-c <left>") 'semantic-tag-folding-fold-block)
-;;   (local-set-key (kbd "C-c <right>") 'semantic-tag-folding-show-block))
-;; (add-hook 'c-mode-common-hook 'my-cedet-hook)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
-(add-hook 'c-mode-common-hook 'google-make-newline-indent)
-;; (add-hook 'lisp-mode-hook 'my-cedet-hook)
-;; (add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
-
-;; (defun my-c-mode-cedet-hook ()
-;;   ;; (local-set-key "." 'semantic-complete-self-insert)
-;;   ;; (local-set-key ">" 'semantic-complete-self-insert)
-;;   (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-;;   (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-;;   (local-set-key "\C-ce" 'eassist-list-methods)
-;;   (local-set-key "\C-c\C-r" 'semantic-symref))
-;; (add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
-
-
-
-;; (semanticdb-enable-gnu-global-databases 'c-mode t)
-;; (semanticdb-enable-gnu-global-databases 'c++-mode t)
-
-;; (defconst cedet-user-include-dirs
-;;   (list ".." "../include" "../inc" "../common" "../public"
-;;         "../.." "../../include" "../../inc" "../../common" "../../public"))
-
-
-;; (let ((include-dirs cedet-user-include-dirs))
-;;   (when (eq system-type 'windows-nt)
-;;     (setq include-dirs (append include-dirs cedet-win32-include-dirs)))
-;;   (mapc (lambda (dir)
-;;           (semantic-add-system-include dir 'c++-mode)
-;;           (semantic-add-system-include dir 'c-mode))
-;;         include-dirs))
-
 ;;;; ============================================================+
-;;;; RTags and its friends.                                      |
+;;;; C++ IDE Configurations                                      |
 ;;;; ------------------------------------------------------------+
 
+;; cmake-ide
+;; 
+;; -- Enable cmake-ide which set corresponding variables based on the
+;; -- CMakeLists.txt if it can find one.
+(cmake-ide-setup)
+
+;; Formatter
+;;
+;; -- Use clang-format to control the style of the code, and format it
+;; -- automatically. The style is defined in a .clang-format file
+;; -- within the project.
+(require 'clang-format)
+(global-set-key [C-M-tab] 'clang-format-region)
+
+(defun clang-format-buffer-and-back-to-indentation ()
+  "Call clang-format to format the whole buffer, and move the
+  cursor to the first non-space character of the current line."
+    (interactive)
+    (clang-format-buffer)
+    (back-to-indentation))
+  
+(defun clang-format-bindings ()
+  "Hijack the tab key to perform the function defined above,
+  which is `clang-format-buffer-and-back-to-indentation`."
+  (define-key c++-mode-map [tab]
+    'clang-format-buffer-and-back-to-indentation))
+
+(add-hook 'c++-mode-hook 'clang-format-bindings)
+
+;; Code Indexer (RTags)
+;;
+;; -- This is for definition jumping and code completion
 (require 'rtags)
 (require 'company-rtags)
 
@@ -118,41 +54,26 @@
 
 (define-key c-mode-base-map (kbd "M-.") (function rtags-find-symbol-at-point))
 (define-key c-mode-base-map (kbd "M-,") (function rtags-location-stack-back))
-;; Other shortcuts defined in the standard-keybndings
-;; - (define-key c-mode-base-map (kbd "C-M-a") (function beginning-of-defun))
-;; - (define-key c-mode-base-map (kbd "C-M-e") (function end-of-defun))
-;; - (define-key c-mode-base-map (kbd "C-M-h") (function makr-defun))
-;; - (define-key c-mode-base-map (kbd "C-c-r ,") (function rtags-find-references-at-point))
+;; ;; Other shortcuts defined in the standard-keybndings
+;; (define-key c-mode-base-map (kbd "C-M-a") (function beginning-of-defun))
+;; (define-key c-mode-base-map (kbd "C-M-e") (function end-of-defun))
+;; (define-key c-mode-base-map (kbd "C-M-h") (function makr-defun))
+;; (define-key c-mode-base-map (kbd "C-c-r ,") (function rtags-find-references-at-point))
 
-
-;;;; ============================================================+
-;;;; Syntax Checking with Flycheck                               |
-;;;; ------------------------------------------------------------+
-
-;; (require 'flycheck)
-;; (add-hook 'c++-mode-hook 'flycheck-mode)
-;; (add-hook 'c-mode-hook 'flycheck-mode)
-
+;; Syntax Checking
+;;
+;; -- Call flycheck (together with RTags) to do syntax check.
 (require 'flycheck-rtags)
 (defun my-flycheck-rtags-setup ()
   (flycheck-select-checker 'rtags)
   (setq-local flycheck-highlighting-mode nil) ;; RTags creates more accurate overlays.
   (setq-local flycheck-check-syntax-automatically nil))
-;; (add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
+(add-hook 'c-mode-common-hook #'my-flycheck-rtags-setup)
 
-;;;; ============================================================+
-;;;; cmake-ide                                                   |
-;;;; ------------------------------------------------------------+
-
-(cmake-ide-setup)
-
-;; To have cmake-ide automatically create a compilation commands file
-;; in your project root create a .dir-locals.el containing the
-;; following:
+;; Compilation Support
 ;;
-;; ((nil . ((cmake-ide-build-dir . "<PATH_TO_PROJECT_BUILD_DIRECTORY>"))))
+;; -- CMake based compilation key bindings.
 
-;;;; Compilation Mode
 ;; copied from http://www.emacswiki.org/emacs/CompileCommand
 (defun in-directory ()
   "Reads a directory name (using ido), then runs
@@ -230,3 +151,10 @@ of FILE in the current directory, suitable for creation"
 (put 'upcase-region 'disabled nil)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+
+
+
+
+
+
