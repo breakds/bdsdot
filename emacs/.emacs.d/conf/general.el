@@ -35,9 +35,15 @@
 (setq visible-bell 't)
 
 ;;; * Font. 
-;; Please make sure that you have the corresponding fonts installed.
-;; For Dejavu the font package is 'ttf-dejavu'.
-(set-frame-font "DejaVu Sans Mono-11")
+
+;; If you really want to set it in your emacs configuration, use the
+;; one below. However, it is not portable and incompatible if you are
+;; sharing this eamcs configuration between displays of different
+;; resolutions (i.e. A normal monitor and a HiDpi one).
+;;
+;; The recommended way is to set "emacs.font" in ~/.Xresources
+;;
+;; (set-frame-font "DejaVu Sans Mono-11")
 
 ;;; * X Window Clipbord (enable utf-8)
 (set-clipboard-coding-system 'utf-8)
