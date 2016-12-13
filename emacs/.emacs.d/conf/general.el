@@ -34,8 +34,10 @@
 ;;; * Visual bell (as alternative to beep)
 (setq visible-bell 't)
 
-;;; * Font. Font size is in 1/10 pt
-(set-face-attribute 'default nil :height 95)
+;;; * Font. 
+;; Please make sure that you have the corresponding fonts installed.
+;; For Dejavu the font package is 'ttf-dejavu'.
+(set-frame-font "DejaVu Sans Mono-11")
 
 ;;; * X Window Clipbord (enable utf-8)
 (set-clipboard-coding-system 'utf-8)
