@@ -1,0 +1,10 @@
+[Unit]
+Description=Jupyter Notebook
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/jupyter notebook --no-browser --port=8512
+WorkingDirectory=/home/breakds/pf
+
+[Install]
+WantedBy=multi-user.target
