@@ -34,6 +34,9 @@
 ;;; * Visual bell (as alternative to beep)
 (setq visible-bell 't)
 
+;;; * Always highlight current line
+(global-hl-line-mode t)
+
 ;;; * Font. 
 
 ;; If you really want to set it in your emacs configuration, use the
