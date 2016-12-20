@@ -1,0 +1,40 @@
+name: breakds
+config:
+  user.vendor-data: |
+    packages:
+        - bash
+description: Mount necessary directories to /home/breakds.
+devices:
+  BCloud:
+    path: /home/breakds/.BCloud
+    source: /home/breakds/.BCloud
+    type: disk
+  Downloads:
+    path: /home/breakds/Downloads
+    source: /home/breakds/Downloads
+    type: disk
+  bashrc:
+    path: /home/breakds/.bashrc
+    source: /home/breakds/.bashrc
+    type: disk
+  eth0:
+    name: eth0
+    nictype: bridged
+    parent: lxdbr0
+    type: nic
+  inputrc:
+    path: /home/breakds/.inputrc
+    source: /home/breakds/.inputrc
+    type: disk
+  projects:
+    path: /home/breakds/projects
+    source: /home/breakds/projects
+    type: disk
+  ssh:
+    path: /home/breakds/.ssh
+    source: /home/breakds/.ssh
+    type: disk
+  tools:
+    path: /home/breakds/tools
+    source: /home/breakds/tools
+    type: disk
