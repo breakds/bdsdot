@@ -68,7 +68,7 @@
     ("~/org/cron.org" "~/org/reading.org" "~/org/unsorted.org" "~/org/projects.org")))
  '(package-selected-packages
    (quote
-    (clang-format cmake-ide rtags flycheck company protobuf-mode yaml-mode web-mode use-package toc-org solarized-theme smart-mode-line org-doing org-dashboard markdown-mode+ load-dir forecast fcitx exec-path-from-shell elm-mode ein cargo))))
+    (json-mode tide web-mode-edit-element clang-format cmake-ide rtags flycheck company protobuf-mode yaml-mode web-mode use-package toc-org solarized-theme smart-mode-line org-doing org-dashboard markdown-mode+ load-dir forecast fcitx exec-path-from-shell elm-mode ein cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

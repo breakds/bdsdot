@@ -19,6 +19,9 @@
 ;;;; ============================================================+
 ;;;; Global Settings                                             |
 ;;;; ------------------------------------------------------------+
+;;; * Disable tab. Use space.
+(setq-default indent-tabs-mode nil)
+
 ;;; * Disable Toolbar
 (tool-bar-mode -1)
 
