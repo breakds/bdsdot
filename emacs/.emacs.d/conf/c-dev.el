@@ -24,18 +24,18 @@
 (require 'clang-format)
 (global-set-key [C-M-tab] 'clang-format-region)
 
-(defun clang-format-buffer-and-back-to-indentation ()
-  "Call clang-format to format the whole buffer, and move the
+(defun clang-format-region-and-back-to-indentation ()
+  "Call clang-format to format the whole region, and move the
   cursor to the first non-space character of the current line."
     (interactive)
-    (clang-format-buffer)
+    (clang-format-region (line-beginning-position) (line-end-position))
     (back-to-indentation))
   
 (defun clang-format-bindings ()
   "Hijack the tab key to perform the function defined above,
-  which is `clang-format-buffer-and-back-to-indentation`."
+  which is `clang-format-region-and-back-to-indentation`."
   (define-key c++-mode-map [tab]
-    'clang-format-buffer-and-back-to-indentation))
+    'clang-format-region-and-back-to-indentation))
 
 (add-hook 'c++-mode-hook 'clang-format-bindings)
 
