@@ -176,3 +176,4 @@ mode "launch" {
 }
 
 bindsym $mod+y mode "launch"
+bindsym $mod+Shift+m exec bash -c "$HOME/scripts/dmenu/mount/mount.sh"
