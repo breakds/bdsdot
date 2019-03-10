@@ -1,0 +1,2 @@
+# Allow specified user to mount without typing password
+breakds ALL=(ALL) NOPASSWD: /bin/mount, /bin/umount
